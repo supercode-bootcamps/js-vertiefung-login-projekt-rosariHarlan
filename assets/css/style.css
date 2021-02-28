@@ -1,0 +1,167 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap");
+
+:root {
+  --bg-color: #3f3e56;
+  --main-color: #8985a8;
+  --logOut-color: #ff002e;
+  --btn-color: #6c63ff;
+}
+
+/* --- General Styling --- */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-color);
+  font-family: "Roboto Mono", monospace;
+  color: var(--main-color);
+  min-height: 100vh;
+  max-width: 100vw;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.red {
+  color: var(--logOut-color);
+}
+
+/* --- Header --- */
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 4.25em;
+}
+
+nav img {
+  margin-left: 7.625em;
+}
+
+ul {
+  display: flex;
+  font-size: 1.25em;
+}
+
+li {
+  list-style: none;
+}
+
+li:nth-child(1) {
+  padding-right: 8em;
+}
+
+li:last-child {
+  padding-right: 7.6875em;
+}
+
+/* --- Main --- */
+
+main {
+  display: flex;
+}
+
+h1 {
+  font-weight: 700;
+  font-size: 4.375em;
+  text-transform: uppercase;
+}
+
+#secret {
+  margin-top: 10em;
+}
+
+#secret p {
+  font-size: 1.75em;
+}
+
+#secret button {
+  background-color: var(--btn-color);
+  text-transform: uppercase;
+  font-size: 1.5625em;
+  border: none;
+  border-radius: 10px;
+  padding: 0.5em 1.5em;
+  margin-top: 5.7em;
+}
+
+/* --- User input popup --- */
+
+form {
+  background-color: var(--main-color);
+  width: 78vw;
+  height: 90vh;
+  text-align: center;
+  border-radius: 15px;
+  position: absolute;
+  top: 10em;
+  left: 10.25em;
+  box-shadow: 0px 8px 30px 0px rgba(0, 0, 0, 0.7);
+}
+
+form h2 {
+  font-size: 3.75em;
+  color: #000;
+  text-transform: uppercase;
+  margin-bottom: 1em;
+  padding-top: 1em;
+}
+
+input {
+  display: block;
+  margin: 0 auto;
+  outline: none;
+  font-size: 1.875em;
+}
+
+input[type="submit"] {
+  background-color: var(--btn-color);
+  text-transform: uppercase;
+  border: none;
+  border-radius: 10px;
+  padding: 0.5em 3.6em;
+  font-size: 1.5625em;
+  width: 43vw;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 43vw;
+  height: 10vh;
+  margin-bottom: 1em;
+}
+
+input::placeholder {
+  font-family: "Roboto Mono", monospace;
+  font-size: 1em;
+  padding-left: 0.5em;
+}
+
+.message {
+  font-size: 1.875em;
+  color: var(--logOut-color);
+  text-align: left;
+  margin-left: 8em;
+  margin-top: 0.5em;
+}
+
+.popup {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 2s, opacity 2s linear;
+}
+
+/* @keyframes zoomOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+} */

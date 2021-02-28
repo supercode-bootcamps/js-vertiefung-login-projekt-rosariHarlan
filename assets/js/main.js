@@ -1,11 +1,14 @@
 // --- Create HTML elements ---
 const loginPopup = document.createElement("div");
-loginPopup.id = "popup";
 document.body.appendChild(loginPopup);
 
 const loginForm = document.createElement("form");
 loginForm.action = "#";
 loginPopup.appendChild(loginForm);
+
+const loginHeader = document.createElement("h2");
+loginHeader.innerHTML = ">Login";
+loginForm.appendChild(loginHeader);
 
 let usernameInput = document.createElement("input");
 usernameInput.type = "text";
@@ -26,6 +29,10 @@ submit.type = "submit";
 submit.value = "submit";
 loginForm.appendChild(submit);
 
+let loginMessage = document.createElement("p");
+loginMessage.classList.add("message");
+loginForm.appendChild(loginMessage);
+
 // --- Global variables ---
 
 const USERS = [
@@ -33,6 +40,12 @@ const USERS = [
   { name: "music_fan_1990", secret: "WeAreTheChampi0ns" },
   { name: "admin", secret: "1234" },
 ];
+
+// --- Show popup onload ---
+
+window.onload = () => {
+  loginPopup.style.visibility = "visible";
+};
 
 // --- Set Cookie ---
 
@@ -67,16 +80,20 @@ let checkInput = () => {
     let username = usernameInput.value;
     let password = passwordInput.value;
     loginForm.reset();
-    USERS.find((x) => {
-      if (x.secret === password) {
-        console.log("yippie");
-        setCookie("username", username, 10);
-        setCookie("password", password, 10);
-        setCookie("logged_in", "true", 10);
-      } else {
-        console.log("try again");
+    for (let x in USERS) {
+      if (USERS[x].name === username && USERS[x].secret === password) {
+        setCookie("username", username, 1);
+        setCookie("password", password, 1);
+        setCookie("logged_in", "true", 1);
+        loginMessage.innerHTML = "Come on in!";
+        loginMessage.style.color = "#000";
+        loginPopup.classList.add("popup");
+      } else if (USERS[x].name === username && USERS[x].secret !== password) {
+        loginMessage.innerHTML = "*password is wrong";
+      } else if (USERS[x].name !== username && USERS[x].secret !== password) {
+        loginMessage.innerHTML = "*user does not exist";
       }
-    });
+    }
   });
 };
 
