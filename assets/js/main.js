@@ -1,38 +1,3 @@
-// --- Create HTML elements ---
-const loginPopup = document.createElement("div");
-document.body.appendChild(loginPopup);
-
-const loginForm = document.createElement("form");
-loginForm.action = "#";
-loginPopup.appendChild(loginForm);
-
-const loginHeader = document.createElement("h2");
-loginHeader.innerHTML = ">Login";
-loginForm.appendChild(loginHeader);
-
-let usernameInput = document.createElement("input");
-usernameInput.type = "text";
-usernameInput.name = "name";
-usernameInput.id = "name";
-usernameInput.placeholder = "username";
-loginForm.appendChild(usernameInput);
-
-let passwordInput = document.createElement("input");
-passwordInput.type = "password";
-passwordInput.name = "password";
-passwordInput.id = "password";
-passwordInput.placeholder = "password";
-loginForm.appendChild(passwordInput);
-
-const submit = document.createElement("input");
-submit.type = "submit";
-submit.value = "submit";
-loginForm.appendChild(submit);
-
-let loginMessage = document.createElement("p");
-loginMessage.classList.add("message");
-loginForm.appendChild(loginMessage);
-
 // --- Global variables ---
 
 const USERS = [
@@ -41,11 +6,16 @@ const USERS = [
   { name: "admin", secret: "1234" },
 ];
 
-// --- Show popup onload ---
-
-window.onload = () => {
-  loginPopup.style.visibility = "visible";
-};
+let submit = document.getElementById("submit");
+let loginPopup = document.getElementById("loginPopup");
+let usernameInput = document.getElementById("name");
+let passwordInput = document.getElementById("password");
+let loginForm = document.getElementById("form");
+let loginMessage = document.querySelector(".message");
+let logout = document.getElementById("logout");
+let welcome = document.getElementById("welcome");
+let asterisk = document.getElementById("asterisks");
+let blurElement = document.getElementById("loginForm");
 
 // --- Set Cookie ---
 
@@ -74,43 +44,48 @@ const getCookie = (cname) => {
 
 // --- Check user input and get cookie ---
 
-let checkInput = () => {
-  submit.addEventListener("click", (e) => {
-    e.preventDefault();
-    let username = usernameInput.value;
-    let password = passwordInput.value;
-    loginForm.reset();
-    for (let x in USERS) {
-      if (USERS[x].name === username && USERS[x].secret === password) {
-        setCookie("username", username, 1);
-        setCookie("password", password, 1);
-        setCookie("logged_in", "true", 1);
-        loginMessage.innerHTML = "Come on in!";
-        loginMessage.style.color = "#000";
-        loginPopup.classList.add("popup");
-      } else if (USERS[x].name === username && USERS[x].secret !== password) {
-        loginMessage.innerHTML = "*password is wrong";
-      } else if (USERS[x].name !== username && USERS[x].secret !== password) {
-        loginMessage.innerHTML = "*user does not exist";
-      }
-    }
-  });
-};
+submit.addEventListener("click", (e) => {
+  let username = usernameInput.value.toLowerCase();
+  let password = passwordInput.value;
+  e.preventDefault();
+  loginForm.reset();
+  let user = USERS.find((x) => x.name === username && x.secret === password);
+  if (user) {
+    loginMessage.innerHTML = "Come on in!";
+    loginMessage.style.color = "#000";
+    loginPopup.classList.add("popup");
+    welcome.innerHTML = `>welcome, ${username}`;
+    setCookie("username", username, 1);
+    setCookie("logged_in", "true", 1);
+    blurElement.classList.remove("blur");
+  }
 
-checkInput();
+  if (!user) {
+    loginMessage.innerHTML = "*user does not exist";
+    asterisk.classList.add("wrong");
+  }
+});
 
 // --- Keep user logged in with cookie ---
 
 function keepLogin() {
   const loggedIn = getCookie("logged_in");
-  console.log(loggedIn);
   if (loggedIn === "true") {
     let userID = getCookie("username");
-    console.log(userID);
-    let pw = getCookie("password");
     usernameInput.value = userID;
-    passwordInput.value = pw;
+    welcome.innerHTML = `>welcome, ${usernameInput.value}`;
+    loginPopup.style.visibility = "hidden";
+    blurElement.classList.remove("blur");
   }
 }
 
 keepLogin();
+
+// --- Remove cookie ---
+
+logout.addEventListener("click", (e) => {
+  setCookie("username", " ", -1);
+  setCookie("logged_in", " ", -1);
+  welcome.innerHTML = ">welcome,";
+  loginPopup.style.visibility = "visible";
+});

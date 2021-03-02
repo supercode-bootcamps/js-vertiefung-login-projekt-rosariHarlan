@@ -152,16 +152,31 @@ input::placeholder {
 }
 
 .popup {
-  visibility: hidden;
   opacity: 0;
   transition: visibility 0s 2s, opacity 2s linear;
 }
 
-/* @keyframes zoomOut {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
+.wrong::after {
+  content: " *";
+  color: var(--logOut-color);
+  position: absolute;
+  font-size: 2em;
+  top: 6em;
+  right: 6.5em;
+}
+
+.blur {
+  backdrop-filter: blur(8px);
+  position: absolute;
+  top: 0;
+  height: 120vh;
+  width: 100vw;
+}
+
+/* #loginForm {
+  position: absolute;
+  top: 0;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  z-index: 1;
 } */
