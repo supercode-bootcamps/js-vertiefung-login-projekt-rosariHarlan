@@ -143,6 +143,8 @@ input::placeholder {
   padding-left: 0.5em;
 }
 
+/* --- Login message --- */
+
 .message {
   font-size: 1.875em;
   color: var(--logOut-color);
@@ -151,10 +153,14 @@ input::placeholder {
   margin-top: 0.5em;
 }
 
+/* --- Popup animation --- */
+
 .popup {
   opacity: 0;
   transition: visibility 0s 2s, opacity 2s linear;
 }
+
+/* --- Add asterisk when input is wrong --- */
 
 .wrong::after {
   content: " *";
@@ -165,18 +171,50 @@ input::placeholder {
   right: 6.5em;
 }
 
+/* --- Blur effect --- */
+
 .blur {
   backdrop-filter: blur(8px);
   position: absolute;
   top: 0;
   height: 120vh;
-  width: 100vw;
+  width: 95vw;
 }
 
-/* #loginForm {
-  position: absolute;
-  top: 0;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  z-index: 1;
-} */
+/* --- Secret content --- */
+
+#random {
+  width: 50vw;
+  margin: 0 auto;
+  text-align: center;
+}
+
+#random img {
+  width: 50%;
+}
+
+#random p {
+  font-size: 1.75em;
+  margin-top: 0.5em;
+}
+
+.secret-content {
+  text-align: center;
+  font-size: 2em;
+  text-transform: uppercase;
+  margin-bottom: 1em;
+  padding-top: 1em;
+}
+
+#button {
+  cursor: pointer;
+  background-color: var(--btn-color);
+  text-transform: uppercase;
+  font-size: 1.5625em;
+  border: none;
+  border-radius: 10px;
+  padding: 0.5em 1.5em;
+  outline: none;
+  margin-left: 25em;
+  margin-bottom: 1em;
+}

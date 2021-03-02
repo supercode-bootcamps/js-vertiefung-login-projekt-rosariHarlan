@@ -51,7 +51,6 @@ submit.addEventListener("click", (e) => {
   loginForm.reset();
   let user = USERS.find((x) => x.name === username && x.secret === password);
   if (user) {
-    loginMessage.innerHTML = "Come on in!";
     loginMessage.style.color = "#000";
     loginPopup.classList.add("popup");
     welcome.innerHTML = `>welcome, ${username}`;
@@ -88,4 +87,6 @@ logout.addEventListener("click", (e) => {
   setCookie("logged_in", " ", -1);
   welcome.innerHTML = ">welcome,";
   loginPopup.style.visibility = "visible";
+  blurElement.classList.add("blur");
+  loginPopup.classList.remove("popup");
 });
