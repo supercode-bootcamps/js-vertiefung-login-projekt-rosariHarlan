@@ -42,51 +42,59 @@ const getCookie = (cname) => {
   return "";
 };
 
-// --- Check user input and get cookie ---
-
-submit.addEventListener("click", (e) => {
-  let username = usernameInput.value.toLowerCase();
-  let password = passwordInput.value;
-  e.preventDefault();
-  loginForm.reset();
-  let user = USERS.find((x) => x.name === username && x.secret === password);
-  if (user) {
-    loginMessage.style.color = "#000";
-    loginPopup.classList.add("popup");
-    welcome.innerHTML = `>welcome, ${username}`;
-    setCookie("username", username, 1);
-    setCookie("logged_in", "true", 1);
-    blurElement.classList.remove("blur");
-  }
-
-  if (!user) {
-    loginMessage.innerHTML = "*user does not exist";
-    asterisk.classList.add("wrong");
-  }
-});
-
 // --- Keep user logged in with cookie ---
 
-function keepLogin() {
+let keepLogin = () => {
   const loggedIn = getCookie("logged_in");
   if (loggedIn === "true") {
     let userID = getCookie("username");
     usernameInput.value = userID;
     welcome.innerHTML = `>welcome, ${usernameInput.value}`;
-    loginPopup.style.visibility = "hidden";
+    loginPopup.style.display = "none";
     blurElement.classList.remove("blur");
   }
-}
+};
 
 keepLogin();
 
+// --- Check user input and get cookie ---
+
+let checkInput = () => {
+  submit.addEventListener("click", (e) => {
+    let username = usernameInput.value.toLowerCase();
+    let password = passwordInput.value;
+    e.preventDefault();
+    loginForm.reset();
+    let user = USERS.find((x) => x.name === username && x.secret === password);
+    if (user) {
+      loginMessage.innerHTML = " ";
+      welcome.innerHTML = `>welcome, ${username}`;
+      setCookie("username", username, 1);
+      setCookie("logged_in", "true", 1);
+      blurElement.classList.remove("blur");
+      loginPopup.style.display = "none";
+    }
+
+    if (!user) {
+      loginMessage.innerHTML = "*user does not exist";
+      asterisk.classList.add("wrong");
+    }
+  });
+};
+
+checkInput();
+
 // --- Remove cookie ---
 
-logout.addEventListener("click", (e) => {
-  setCookie("username", " ", -1);
-  setCookie("logged_in", " ", -1);
-  welcome.innerHTML = ">welcome,";
-  loginPopup.style.visibility = "visible";
-  blurElement.classList.add("blur");
-  loginPopup.classList.remove("popup");
-});
+let removeCookie = () => {
+  logout.addEventListener("click", (e) => {
+    setCookie("username", " ", -1);
+    setCookie("logged_in", " ", -1);
+    welcome.innerHTML = ">welcome,";
+    loginPopup.style.display = "block";
+    loginPopup.classList.remove("popup");
+    blurElement.classList.add("blur");
+  });
+};
+
+removeCookie();

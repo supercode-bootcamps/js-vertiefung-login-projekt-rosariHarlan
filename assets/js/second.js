@@ -43,8 +43,14 @@ let randomImage = [
 
 let container = document.getElementById("random");
 let btn = document.getElementById("button");
+let addImg = document.createElement("img");
+container.appendChild(addImg);
+let addText = document.createElement("p");
+container.appendChild(addText);
 
 btn.addEventListener("click", (e) => {
   let showRandom = randomImage[Math.floor(Math.random() * randomImage.length)];
-  container.innerHTML = `<img src="${showRandom.src}"><br><p>${showRandom.caption}</p>`;
+  addImg.src = showRandom.src;
+  addText.innerHTML = showRandom.caption;
+  btn.innerHTML = "More!";
 });
