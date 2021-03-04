@@ -64,7 +64,7 @@ let checkInput = () => {
     let username = usernameInput.value.toLowerCase();
     let password = passwordInput.value;
     e.preventDefault();
-    loginForm.reset();
+    // loginForm.reset();
     let user = USERS.find((x) => x.name === username && x.secret === password);
     if (user) {
       loginMessage.innerHTML = " ";
@@ -74,10 +74,9 @@ let checkInput = () => {
       blurElement.classList.remove("blur");
       loginPopup.style.display = "none";
     }
-
     if (!user) {
       loginMessage.innerHTML = "*user does not exist";
-      asterisk.classList.add("wrong");
+      asterisk.classList.add("wrongId");
     }
   });
 };
@@ -88,6 +87,7 @@ checkInput();
 
 let removeCookie = () => {
   logout.addEventListener("click", (e) => {
+    loginForm.reset();
     setCookie("username", " ", -1);
     setCookie("logged_in", " ", -1);
     welcome.innerHTML = ">welcome,";

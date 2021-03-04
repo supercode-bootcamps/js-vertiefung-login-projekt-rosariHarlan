@@ -5,6 +5,7 @@
   --main-color: #8985a8;
   --logOut-color: #ff002e;
   --btn-color: #6c63ff;
+  --font-color: #2f2e41;
 }
 
 /* --- General Styling --- */
@@ -87,6 +88,7 @@ h1 {
 
 #secret button {
   background-color: var(--btn-color);
+  color: var(--font-color);
   text-transform: uppercase;
   font-size: 1.5625em;
   border: none;
@@ -94,28 +96,29 @@ h1 {
   padding: 0.5em 1.5em;
   margin-top: 5.7em;
   cursor: pointer;
-  /* transition: all 0.3s ease-in-out; */
-}
-
-/* #secret button::before {
-  position: absolute;
-  opacity: 0;
-  left: 35.5em;
-  transform: translate(-100%, 0);
-  transition: all 0.3s ease-in-out;
-}
-
-#secret button:hover::before {
-  content: "Click me!";
-  opacity: 1;
-  transform: translate(0, 0);
-}
-
-#secret button:hover div {
-  opacity: 0;
-  transform: translate(100%, 0);
+  overflow: hidden;
   position: relative;
-} */
+}
+
+#secret a:before {
+  content: "Click me!";
+  position: absolute;
+  bottom: 0;
+  height: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  transition: all 0.4s ease-in-out;
+}
+
+#secret a:hover {
+  color: #000;
+}
+
+#secret a:hover::before {
+  height: 2.1em;
+  background-color: #fff;
+}
 
 /* --- User input popup --- */
 
@@ -133,7 +136,7 @@ form {
 
 form h2 {
   font-size: 3.75em;
-  color: #000;
+  color: var(--font-color);
   text-transform: uppercase;
   margin-bottom: 1em;
   padding-top: 1em;
@@ -149,6 +152,7 @@ input {
 
 input[type="submit"] {
   background-color: var(--btn-color);
+  color: var(--font-color);
   text-transform: uppercase;
   border: none;
   border-radius: 10px;
@@ -174,7 +178,6 @@ input[type="password"] {
 }
 
 input::placeholder {
-  font-family: "Roboto Mono", monospace;
   font-size: 1em;
 }
 
@@ -188,28 +191,30 @@ input::placeholder {
   margin-top: 0.5em;
 }
 
-/* --- Popup animation --- */
-
-/* .popup {
-  opacity: 0;
-  transition: opacity 2s linear;
-} */
-
 /* --- Add asterisk when input is wrong --- */
 
-.wrong::after {
+.wrongId::after {
   content: " *";
   color: var(--logOut-color);
   position: absolute;
   font-size: 2em;
-  top: 6em;
-  right: 6.5em;
+  top: 6.3em;
+  right: 7em;
 }
+
+/* .wrongPw::after {
+  content: " *";
+  color: var(--logOut-color);
+  position: absolute;
+  font-size: 2em;
+  top: 10em;
+  right: 6.5em;
+} */
 
 /* --- Blur effect --- */
 
 .blur {
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(5px);
   position: absolute;
   top: 0;
   height: 120vh;
@@ -220,6 +225,7 @@ input::placeholder {
 
 #random {
   width: 50vw;
+  height: 50vh;
   margin: 0 auto;
   text-align: center;
 }
@@ -252,4 +258,20 @@ input::placeholder {
   outline: none;
   margin-left: 25em;
   margin-bottom: 1em;
+}
+
+#button:hover {
+  animation: bounce 1s ease-in-out;
+}
+
+@keyframes bounce {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.8);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
