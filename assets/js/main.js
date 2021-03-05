@@ -57,7 +57,7 @@ let keepLogin = () => {
 
 keepLogin();
 
-// --- Check user input and get cookie ---
+// --- Check user input and get cookie with find method---
 
 let checkUserinput = () => {
   submit.addEventListener("click", (e) => {
@@ -87,7 +87,53 @@ let checkUserinput = () => {
   });
 };
 
-checkUserinput();
+// checkUserinput();
+
+// --- Check user input with API ---
+
+let checkInput = () => {
+  submit.addEventListener("click", (e) => {
+    e.preventDefault();
+    let username = usernameInput.value.toLowerCase();
+    let password = passwordInput.value;
+    fetch("https://supercode-auth-demo.herokuapp.com/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: username,
+        secret: password,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        if (data.success) {
+          loginMessage.innerHTML = " ";
+          welcome.innerHTML = `>welcome, ${username}`;
+          setCookie("username", username, 1);
+          setCookie("logged_in", "true", 1);
+          blurElement.classList.remove("blur");
+          loginPopup.style.display = "none";
+        } else {
+          loginMessage.innerHTML = data.message;
+        }
+
+        if (data.message === "wrong password") {
+          asterisk.classList.add("wrongPw");
+          passwordInput.classList.add("red");
+        }
+
+        if (data.message === "user not found") {
+          usernameInput.classList.add("red");
+          asterisk.classList.add("wrongId");
+        }
+      });
+  });
+};
+
+checkInput();
 
 // --- Remove cookie ---
 
