@@ -59,14 +59,14 @@ keepLogin();
 
 // --- Check user input and get cookie ---
 
-let checkInput = () => {
+let checkUserinput = () => {
   submit.addEventListener("click", (e) => {
+    e.preventDefault();
     let username = usernameInput.value.toLowerCase();
     let password = passwordInput.value;
-    e.preventDefault();
-    // loginForm.reset();
-    let user = USERS.find((x) => x.name === username && x.secret === password);
-    if (user) {
+    let checkName = USERS.find((user) => user.name === username);
+    let checkPw = USERS.find((userPw) => userPw.secret === password);
+    if (checkName && checkPw) {
       loginMessage.innerHTML = " ";
       welcome.innerHTML = `>welcome, ${username}`;
       setCookie("username", username, 1);
@@ -74,14 +74,20 @@ let checkInput = () => {
       blurElement.classList.remove("blur");
       loginPopup.style.display = "none";
     }
-    if (!user) {
+    if (!checkName) {
       loginMessage.innerHTML = "*user does not exist";
+      usernameInput.classList.add("red");
       asterisk.classList.add("wrongId");
+    }
+    if (!checkPw) {
+      loginMessage.innerHTML = "*password is not correct";
+      passwordInput.classList.add("red");
+      asterisk.classList.add("wrongPw");
     }
   });
 };
 
-checkInput();
+checkUserinput();
 
 // --- Remove cookie ---
 
@@ -92,8 +98,9 @@ let removeCookie = () => {
     setCookie("logged_in", " ", -1);
     welcome.innerHTML = ">welcome,";
     loginPopup.style.display = "block";
-    loginPopup.classList.remove("popup");
     blurElement.classList.add("blur");
+    asterisk.classList.remove("wrongId");
+    asterisk.classList.remove("wrongPw");
   });
 };
 
