@@ -75,12 +75,12 @@ let checkUserinput = () => {
       loginPopup.style.display = "none";
     }
     if (!checkName) {
-      loginMessage.innerHTML = "*user does not exist";
+      loginMessage.innerHTML = "*user does not exist.";
       usernameInput.classList.add("red");
       asterisk.classList.add("wrongId");
     }
     if (!checkPw) {
-      loginMessage.innerHTML = "*password is not correct";
+      loginMessage.innerHTML = "*password is wrong.";
       passwordInput.classList.add("red");
       asterisk.classList.add("wrongPw");
     }
@@ -101,6 +101,8 @@ let removeCookie = () => {
     blurElement.classList.add("blur");
     asterisk.classList.remove("wrongId");
     asterisk.classList.remove("wrongPw");
+    usernameInput.classList.remove("red");
+    passwordInput.classList.remove("red");
   });
 };
 
