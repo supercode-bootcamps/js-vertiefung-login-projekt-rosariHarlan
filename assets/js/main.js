@@ -57,38 +57,6 @@ let keepLogin = () => {
 
 keepLogin();
 
-// --- Check user input and set cookie with find method---
-
-// let checkUserinput = () => {
-//   submit.addEventListener("click", (e) => {
-//     e.preventDefault();
-//     let username = usernameInput.value.toLowerCase();
-//     let password = passwordInput.value;
-//     let checkName = USERS.find((user) => user.name === username);
-//     let checkPw = USERS.find((userPw) => userPw.secret === password);
-//     if (checkName && checkPw) {
-//       loginMessage.innerHTML = " ";
-//       welcome.innerHTML = `>welcome, ${username}`;
-//       setCookie("username", username, 1);
-//       setCookie("logged_in", "true", 1);
-//       blurElement.classList.remove("blur");
-//       loginPopup.style.display = "none";
-//     }
-//     if (!checkName) {
-//       loginMessage.innerHTML = "*user does not exist.";
-//       usernameInput.classList.add("red");
-//       asterisk.classList.add("wrongId");
-//     }
-//     if (!checkPw) {
-//       loginMessage.innerHTML = "*password is wrong.";
-//       passwordInput.classList.add("red");
-//       asterisk.classList.add("wrongPw");
-//     }
-//   });
-// };
-
-// checkUserinput();
-
 // --- Check user input and set cookie with API ---
 
 let checkInput = () => {
@@ -139,15 +107,9 @@ checkInput();
 let removeCookie = () => {
   logout.addEventListener("click", (e) => {
     loginForm.reset();
+    location.reload();
     setCookie("username", " ", -1);
     setCookie("logged_in", " ", -1);
-    welcome.innerHTML = ">welcome,";
-    loginPopup.style.display = "block";
-    blurElement.classList.add("blur");
-    asterisk.classList.remove("wrongId");
-    asterisk.classList.remove("wrongPw");
-    usernameInput.classList.remove("red");
-    passwordInput.classList.remove("red");
   });
 };
 
