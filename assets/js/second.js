@@ -43,14 +43,23 @@ let randomImage = [
 
 let container = document.getElementById("random");
 let btn = document.getElementById("button");
-let addImg = document.createElement("img");
-container.appendChild(addImg);
-let addText = document.createElement("p");
-container.appendChild(addText);
+// let addImg = document.createElement("img");
+// container.appendChild(addImg);
+// let addText = document.createElement("p");
+// container.appendChild(addText);
+
+// btn.addEventListener("click", (e) => {
+//   let showRandom = randomImage[Math.floor(Math.random() * randomImage.length)];
+//   addImg.src = showRandom.src;
+//   addText.innerHTML = showRandom.caption;
+//   btn.innerHTML = "More!";
+// });
 
 btn.addEventListener("click", (e) => {
-  let showRandom = randomImage[Math.floor(Math.random() * randomImage.length)];
-  addImg.src = showRandom.src;
-  addText.innerHTML = showRandom.caption;
-  btn.innerHTML = "More!";
+  fetch("http://api.icndb.com/jokes/random")
+    .then((response) => response.json())
+    .then((data) => {
+      container.innerHTML = data.value.joke;
+      btn.innerHTML = "More!";
+    });
 });

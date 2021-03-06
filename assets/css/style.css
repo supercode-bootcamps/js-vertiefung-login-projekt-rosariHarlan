@@ -195,13 +195,14 @@ input::placeholder {
   font-weight: 700;
   color: var(--logOut-color);
   text-align: left;
-  margin-left: 8em;
+  margin-left: 8.5em;
   margin-top: 1em;
 }
 
 /* --- Add asterisk when input is wrong --- */
 
-.wrongId::after {
+.wrongId::after,
+.wrongPw::after {
   content: " *";
   color: var(--logOut-color);
   position: absolute;
@@ -211,10 +212,6 @@ input::placeholder {
 }
 
 .wrongPw::after {
-  content: " *";
-  color: var(--logOut-color);
-  position: absolute;
-  font-size: 2em;
   top: 9.7em;
   right: 7em;
 }
@@ -233,25 +230,27 @@ input::placeholder {
 
 #random {
   width: 50vw;
-  height: 50vh;
+  /* height: 50vh; */
   margin: 0 auto;
   text-align: center;
+  font-size: 2em;
 }
 
-#random img {
+/* #random img {
   width: 50%;
 }
 
 #random p {
   font-size: 1.75em;
   margin-top: 0.5em;
-}
+} */
 
 .secret-content {
   text-align: center;
   font-size: 2em;
   text-transform: uppercase;
-  margin-bottom: 1em;
+  margin-bottom: 2em;
+  margin-top: 2em;
   padding-top: 1em;
 }
 
@@ -264,7 +263,7 @@ input::placeholder {
   padding: 0.5em 1.5em;
   outline: none;
   margin-left: 26em;
-  margin-bottom: 1em;
+  margin-bottom: 2em;
 }
 
 #button:hover {
